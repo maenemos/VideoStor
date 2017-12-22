@@ -1,0 +1,72 @@
+﻿@model VideoStore.Models.MovieRentModel
+
+@{
+    ViewBag.Title = "CreateByCustomerId";
+}
+
+<h2>Rent movie</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>MovieRentModel</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerId, "Customer", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CustomerId", ViewData["Customers"] as IEnumerable<SelectListItem>, "Select Customer")
+                @Html.ValidationMessageFor(model => model.CustomerId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MovieId, "Movie", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MovieId", ViewData["Movies"] as IEnumerable<SelectListItem>, "Select Movie")
+                @Html.ValidationMessageFor(model => model.MovieId)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RentStartDateTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.RentStartDateTime)
+                @Html.ValidationMessageFor(model => model.RentStartDateTime)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ReturnDateTime, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ReturnDateTime)
+                @Html.ValidationMessageFor(model => model.ReturnDateTime)
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsReturned, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsReturned)
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

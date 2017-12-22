@@ -1,0 +1,74 @@
+﻿@model VideoStore.Models.MovieModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>MovieModel</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NumberOfCopies, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NumberOfCopies)
+                @Html.ValidationMessageFor(model => model.NumberOfCopies)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Genre, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="Genre" name="Genre">
+                    <option value="">---Select Genre---</option>
+                    <option value="Action">Action</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Science fiction">Science fiction</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.Genre)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MaxRentDays, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MaxRentDays)
+                @Html.ValidationMessageFor(model => model.MaxRentDays)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

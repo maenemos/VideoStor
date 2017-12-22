@@ -1,0 +1,64 @@
+﻿@model IEnumerable<VideoStore.Models.MovieRentModel>
+
+@{
+    ViewBag.Title = "Customer Movies";
+}
+
+<h2>Movies that is Rented by customer: <span style="color:#590e87">@ViewBag.CustomerName</span></h2>
+
+<p>
+    @Html.ActionLink("Rent new movie", "CreateByCustomerId/" + (ViewContext.RouteData.Values["id"]), "MovieRents")
+</p>
+<table class="table">
+    <tr>
+        
+        <th>
+           Movie Title
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RentStartDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsReturned)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.movie.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RentStartDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnDateTime)
+        </td>
+        <td>
+            @if (item.IsReturned)
+            {
+                 <span style="color:#ff6a00">Returned</span>
+                
+            }
+            else
+            {               
+                <span style="color:#36800a">Not returned</span>
+                 if (item.IsOverdue){ <span style="color:#ff0000"> *overdue</span>}
+            }
+           
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
